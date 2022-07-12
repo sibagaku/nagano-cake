@@ -1,0 +1,87 @@
+<header>
+  <nav class="navbar　navbar-light　bg-white">
+    <div class="container-fluid border-bottom border-dark">
+      <div class="row">
+        <div class="col-4 my-4">
+          <a class="navbar-brand" href="/">
+            <span><%= image_tag "logo.png" %></span>
+          </a>
+        </div>
+        <div class="col-3 ml-auto my-2 ">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between">
+              <%= link_to "About", about_path, class:"btn btn-sm btn-outline-secondary me-2 "  %>
+              <%= link_to "商品一覧", public_items_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
+              <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
+              <%= link_to "ログイン", new_customer_session_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 input-group ml-auto my-2">
+              <input type="text" class="form-control" placeholder="search">
+	             <span class="input-group-btn">
+		            <button type="button" class="btn btn-default">🔎</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-4 mb-5">
+      <h5><span class="bg-light">管理者ログイン</span></h5>
+    </div>
+  </div>
+</div>
+    
+
+
+<div class="container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <div class="row">
+          <div class="col-5 d-flex justify-content-end">
+            <%= f.label :メールアドレス %>
+          </div>
+          <div class="col-6 ml-5">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="field mt-3">
+        <div class="row">
+          <div class="col-5 d-flex justify-content-end">
+            <%= f.label :パスワード %>
+          </div>
+          <div class="col-6 ml-5">
+            <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="field mt-5">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <div class="actions">
+              <%= f.submit "ログイン", class:"btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      
+    <% end %>
+
+    <%= render "admin/shared/links" %>
+  
+</div>
+
+
