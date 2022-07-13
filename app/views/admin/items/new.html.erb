@@ -1,0 +1,50 @@
+<%= render "admin/genres/list",　genres: @genres %>
+
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col-4 mt-5 mb-5 d-flex justify-content-center">
+      <h5><span class="bg-light">商品新規登録</span></h5>
+    </div>
+  </div>
+</div>
+    
+<%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+<div class="container">
+  <div class="form-group">
+    <div class="row ">
+        <div class="col-2 mb-1 align-items-center">
+            <%= f.label :商品画像, class:"mb-0" %>
+        </div>
+        <div class="col-6" >
+            <%= f.file_field :image, accept:"image/*" %>
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row ">
+        <div class="col-2 mb-1  align-items-center">
+            <%= f.label :商品名, class:"mb-0" %>
+        </div>
+        <div class="col-6">
+            <%= f.text_field :name,  class:"form-control" %>
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row ">
+        <div class="col-2 mb-1  align-items-center">
+            <%= f.label :商品説明, class:"mb-0" %>
+        </div>
+        <div class="col-6">
+            <%= f.text_area :introduction, class:"form-control" %>
+        </div>
+    </div>
+  </div>
+  
+</div>
+<% end %>
+
+</main>
