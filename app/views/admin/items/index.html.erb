@@ -1,0 +1,47 @@
+<%= render "admin/genres/list",　genres: @genres %>
+
+<main>
+<div class="container">
+  <div class="row">
+    <div class="title col-9 mt-5 mb-5">
+      <h5><span class="bg-light">商品一覧</span></h5>
+    </div>
+    <div class="col-1 mt-5 mb-5 ml-auto">
+      <%= link_to new_admin_item_path do %>
+        <i class="fa-solid fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td>
+                <%= link_to item.name, admin_item_path %>
+              </td>
+              <td><%= item.price %></td>
+              <td><%= item.genre.id %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+    
+</div>
+</main>

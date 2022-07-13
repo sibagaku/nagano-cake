@@ -3,7 +3,7 @@
 <main>
 <div class="container">
   <div class="row">
-    <div class="col-4 mt-5 mb-5 d-flex justify-content-center">
+    <div class="title col-8 mt-5 mb-5">
       <h5><span class="bg-light">商品新規登録</span></h5>
     </div>
   </div>
@@ -13,10 +13,10 @@
 <div class="container">
   <div class="form-group">
     <div class="row ">
-        <div class="col-2 mb-1 align-items-center">
+        <div class="col-3 mb-1 align-items-center">
             <%= f.label :商品画像, class:"mb-0" %>
         </div>
-        <div class="col-6" >
+        <div class="col-9">
             <%= f.file_field :image, accept:"image/*" %>
         </div>
     </div>
@@ -24,22 +24,75 @@
   
   <div class="form-group">
     <div class="row ">
-        <div class="col-2 mb-1  align-items-center">
+        <div class="col-3 mb-1  align-items-center">
             <%= f.label :商品名, class:"mb-0" %>
         </div>
-        <div class="col-6">
-            <%= f.text_field :name,  class:"form-control" %>
+        <div class="col-9">
+            <%= f.text_field :name, placeholder: "商品名", size: "42" %>
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+        <div class="col-3 mb-1  align-items-center">
+            <%= f.label :商品説明, class:"mb-0" %>
+        </div>
+        <div class="col-9">
+            <%= f.text_area :introduction, placeholder: "ここに説明文を記述します", size: "45x7" %>
         </div>
     </div>
   </div>
   
   <div class="form-group">
     <div class="row ">
-        <div class="col-2 mb-1  align-items-center">
-            <%= f.label :商品説明, class:"mb-0" %>
+        <div class="col-3 mb-1 mb-0 align-items-center">
+            <%= f.label :ジャンル, class:"mb-0" %>
         </div>
-        <div class="col-6">
-            <%= f.text_area :introduction, class:"form-control" %>
+        <div class="col-9">
+            <select class="width-list">
+              <option selected>--選択してください--</option>
+              <% @genres.each do |genre| %>
+                <option><%= genre.name %></option>
+              <% end %>
+            </select>
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row ">
+        <div class="col-3 mb-1  align-items-center">
+            <%= f.label :税抜価格, class:"mb-0" %>
+        </div>
+        <div class="col-9">
+            <%= f.text_field :price, placeholder: "1000", size: "42" %>円
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row ">
+        <div class="col-3 mb-1  align-items-center">
+            <%= f.label :販売ステータス, class:"mb-0" %>
+        </div>
+        <div class="col-9">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">販売中</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">販売停止中</label>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row dflex justify-content-center">
+        <div class="col-3 mb-1  ">
+            <%= f.submit"新規登録",  class:"btn btn-success" %>
         </div>
     </div>
   </div>
