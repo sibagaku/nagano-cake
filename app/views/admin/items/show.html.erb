@@ -1,0 +1,50 @@
+<%= render "admin/genres/list", genres:@genres %>
+
+<main>
+<div class="container">
+  <div class="row">
+    <div class="title col-8 mt-5 mb-5">
+      <h5><span class="bg-light">商品詳細</span></h5>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-4">
+          <%= image_tag @item.get_image(200,200) %>
+      </div>
+      <div class="col-7">
+          <div class="row">
+              <div class="col-3">商品名</div>
+              <div class="col-4"><%= @item.name %></div>
+          </div>
+          <div class="row">
+              <div class="col-3">商品説明</div>
+              <div class="col-4"><%= @item.introduction %></div>
+          </div>
+          <div class="row">
+              <div class="col-3">ジャンル</div>
+              <div class="col-4"><%= @item.genre.name %></div>
+          </div>
+          <div class="row">
+              <div class="col-3">
+                  <div class="row">
+                      <div class="col-12">税込価格</div>
+                      <div class="col-12">（税抜価格）</div>
+                  </div>
+              </div>
+              <div class="col-4">
+                  <%= @item.with_tax_price %>(<%= @item.price %>)円
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+</div>
+    
+    
+    
+</main>

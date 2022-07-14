@@ -50,12 +50,7 @@
             <%= f.label :ジャンル, class:"mb-0" %>
         </div>
         <div class="col-9">
-            <select class="width-list">
-              <option selected>--選択してください--</option>
-              <% @genres.each do |genre| %>
-                <option><%= genre.name %></option>
-              <% end %>
-            </select>
+            <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
         </div>
     </div>
   </div>
@@ -77,14 +72,10 @@
             <%= f.label :販売ステータス, class:"mb-0" %>
         </div>
         <div class="col-9">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1">販売中</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1">販売停止中</label>
-            </div>
+          <%= f.radio_button :is_active, :true, checked: true %>
+          <%= f.label :is_active, "販売中", value: true %>
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "販売停止中", value: false %>
         </div>
     </div>
   </div>
