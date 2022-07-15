@@ -3,6 +3,16 @@ class Order < ApplicationRecord
     belongs_to :customer
     has_many :order_items
     
+    validates :delivery_address, presence: true
+    validates :delivery_name, presence: true
+    validates :delivery_postal_code, presence: true
+    validates :payment, presence: true
+    validates :status, presence: true
+    validates :postage, presence: true
+    validates :payment_method, presence: true
+    validates :customer_id, presence: true
+    
+    
     enum status:{
         入金待ち: 0,
         入金確認: 1,

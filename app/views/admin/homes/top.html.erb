@@ -1,0 +1,43 @@
+<%= render "admin/genres/list", genres:@genres %>
+
+<main>
+
+<div class="container">
+  <div class="row">
+    <div class="title col-8 mt-5 mb-5">
+      <h5><span class="bg-light">注文履歴一覧</span></h5>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-12">
+          <table class="table">
+              <thead class="bg-light">
+                  <tr>
+                      <th>購入日時</th>
+                      <th>購入者</th>
+                      <th>注文個数</th>
+                      <th>注文ステータス</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% @orders.each do |order| %>
+                  <tr>
+                      <td><%= order.created_at %></td>
+                      <td><%= order.name %></td>
+                      <td><%= order.order_items.amount %></td>
+                      <td><%= order.is_active %></td>
+                  </tr>
+                  <% end %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+</div>
+
+</main>

@@ -9,34 +9,47 @@
   </div>
   
   <div class="row">
-      <div class="col-4">
+      <div class="col-3">
           <%= image_tag @item.get_image(200,200) %>
       </div>
-      <div class="col-7">
-          <div class="row">
-              <div class="col-3">商品名</div>
-              <div class="col-4"><%= @item.name %></div>
+      <div class="col-8">
+          <div class="row mb-4">
+              <div class="col-4">商品名</div>
+              <div class="col-8"><%= @item.name %></div>
           </div>
-          <div class="row">
-              <div class="col-3">商品説明</div>
-              <div class="col-4"><%= @item.introduction %></div>
+          <div class="row mb-4">
+              <div class="col-4">商品説明</div>
+              <div class="col-8"><%= @item.introduction %></div>
           </div>
-          <div class="row">
-              <div class="col-3">ジャンル</div>
-              <div class="col-4"><%= @item.genre.name %></div>
+          <div class="row mb-4">
+              <div class="col-4">ジャンル</div>
+              <div class="col-8"><%= @item.genre.name %></div>
           </div>
-          <div class="row">
-              <div class="col-3">
+          <div class="row mb-4">
+              <div class="col-4">
                   <div class="row">
                       <div class="col-12">税込価格</div>
                       <div class="col-12">（税抜価格）</div>
                   </div>
               </div>
-              <div class="col-4">
+              <div class="col-8 d-flex align-items-center">
                   <%= @item.with_tax_price %>(<%= @item.price %>)円
               </div>
           </div>
+          <div class="row mb-4">
+              <div class="col-4">販売ステータス</div>
+              <div class="col-8">
+                  <% if @item.is_active == true %>
+                      <strong class="text-success"><%= "販売中" %></strong>
+                  <% else %>
+                      <strong class="text-secondary"><%= "販売停止中" %></strong>
+                  <% end %>
+              </div>
+          </div>
       </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+     <%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-success" %>
   </div>
   
   
