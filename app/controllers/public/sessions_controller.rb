@@ -22,7 +22,17 @@ class Public::SessionsController < Devise::SessionsController
   protected
   
   #退会しているか判断するメソッド
-  
+  def customer_state
+    @customer = Customer.find_by(email: params[:customer][:email])
+    return if !@customer
+    if @customer.valid_passward?(params[:customer][:passward]) && @customer.is_deleted == true
+      redirect_to new_customer_registration_path
+    else
+      render "/"
+    end
+  end
+      
+      
         
 
   # If you have extra params to permit, append them to the sanitizer.

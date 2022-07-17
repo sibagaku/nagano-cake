@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :create, :index, :show]
     resources :address, only:[:index, :create, :edit, :update, :destroy]
   end
+  
+  
   get "/admin" => "admin/homes#top", as:"admin"
   
   namespace :admin do
