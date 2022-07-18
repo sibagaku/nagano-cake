@@ -1,26 +1,60 @@
-<h2>Log in</h2>
+<%= render "public/homes/list", homes:@homes %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="title col-12 mt-5 mb-4 ">
+      <h5><span class="title-bg-color px-3">ログイン</span></h5>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  
+  <%= form_with model:@customers, url: customer_session_path, method: :post do |f| %>
+  <div class="row">
+    <div class="title col-12">
+      <h6><span class="title-bg-color px-3 ml-4">会員の方はこちらからログイン</span></h6>
+      
+    <div class="login-field">
+      <div class="row mt-4">
+        <div class="col-2">
+          <%= f.label :メールアドレス %>
+        </div>
+        <div class="col-8">
+          <%= f.text_field :email, class:"login-information", placeholder:"sample@example.com" %>
+        </div>
+      </div>
+    </div>
+      
+    <div class="login-field">
+      <div class="row mt-3">
+        <div class="col-2">
+          <%= f.label :パスワード %>
+        </div>
+        <div class="col-8">
+          <%= f.text_field :encrypted_password, class:"login-information" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="login-field">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <div class="actions  my-4">
+            <%= f.submit "ログイン",class:"btn btn-sm btn-primary login-btn" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <% end %>
+  
+  <div class="row mt-4">
+      <div class="title col-12">
+        <h6><span class="title-bg-color px-3 ml-4">会員登録がお済みでない方</span></h6>
+        <div class="new-information-btn col-12 mt-4">
+          <%= link_to "こちら", new_customer_registration_path %>　から新規登録を行ってください。
+        </div>
+      </div>
+  </div>
+</div>
 
-<%= render "public/shared/links" %>

@@ -15,10 +15,10 @@ class Customer < ApplicationRecord
          validates :postal_code, presence: true
          validates :address, presence: true
          validates :telephone_number, presence: true
-         validates :is_deleted, presence: true
-         
-         def full_name
+        
+        def full_name
             self.last_name + self.first_name
-         end
+        end
+        
          
 end

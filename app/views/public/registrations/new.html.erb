@@ -3,12 +3,14 @@
 <div class="container">
   <div class="row">
     <div class="title col-8 mt-5 mb-5">
-      <h5><span class="bg-light">新規会員登録</span></h5>
+      <h5><span class="title-bg-color px-3">新規会員登録</span></h5>
     </div>
   </div>
 
 
-<%= form_with model:@customers, url: customer_registration_path, method: :post do |f| %>
+<%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer' do |f| %>
+<%= render "devise/shared/error_messages", resource: resource %>
+
   <div class="field">
     <div class="row mb-2">
       <div class="col-2 px-0">
@@ -117,7 +119,7 @@
 
   <div class="row">
     <div class="title col-7 mt-5">
-      <h5><span class="bg-light">既に登録済みの方</span></h5>
+      <h5><span class="title-bg-color px-3">既に登録済みの方</span></h5>
       <div class="col-12 ml-3">
         <%= link_to "こちら", new_customer_session_path %>　からログインしてください。
       </div>
