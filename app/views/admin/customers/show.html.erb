@@ -1,0 +1,77 @@
+<%= render "admin/genres/list", genres:@genres %>
+
+<main>
+
+<div class="container">
+  <div class="row">
+    <div class="title col-8 mt-5 mb-5">
+      <h5><span class="title-bg-color px-3"><%= @customer.full_name %>さんの会員詳細</span></h5>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">会員ID</div>
+      <div class="col-7"><%= @customer.id %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">氏名</div>
+      <div class="col-7"><%= @customer.last_name %>　<%= @customer.first_name %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">フリガナ</div>
+      <div class="col-7"><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">郵便番号</div>
+      <div class="col-7"><%= @customer.postal_code %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">住所</div>
+      <div class="col-7"><%= @customer.address %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">電話番号</div>
+      <div class="col-7"><%= @customer.telephone_number %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">メールアドレス</div>
+      <div class="col-7"><%= @customer.email %></div>
+  </div>
+  
+  <div class="row mb-3">
+      <div class="col-1"></div>
+      <div class="col-2 ml-4">会員ステータス</div>
+      <div class="col-7">
+          <% if @customer.is_deleted == false %>
+              <strong class="text-success"><%= "有効" %></strong>
+          <% else %>
+              <strong class="text-success"><%= "退会" %></strong>
+          <% end %>
+      </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-3 ml-4"></div>
+      <div class="col-2">
+          <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %> 
+      </div>
+      <div class="col-4">
+          <%= link_to "注文履歴一覧を見る", admin_path, class:"btn btn-primary" %>
+      </div>
+  </div>
+  
+</div>
+</main>
