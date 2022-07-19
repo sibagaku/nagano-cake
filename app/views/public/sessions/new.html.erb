@@ -7,7 +7,7 @@
     </div>
   </div>
   
-  <%= form_with model:@customers, url: customer_session_path, method: :post do |f| %>
+  <%= form_with model: @customer, url: customer_session_path do |f| %>
   <div class="row">
     <div class="title col-12">
       <h6><span class="title-bg-color px-3 ml-4">会員の方はこちらからログイン</span></h6>
@@ -29,7 +29,7 @@
           <%= f.label :パスワード %>
         </div>
         <div class="col-8">
-          <%= f.text_field :encrypted_password, class:"login-information" %>
+          <%= f.password_field :password, class:"login-information" %>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@
           <div class="row">
              <% if customer_signed_in? %>
                   <div class="col-12 d-flex justify-content-between">
-                      <%= link_to "マイページ", public_customer_path(@customer.id), class:"btn btn-sm btn-outline-secondary me-2" %>
+                      <%= link_to "マイページ", public_customer_path(current_customer), class:"btn btn-sm btn-outline-secondary me-2" %>
                       <%= link_to "商品一覧", public_items_path, class:"btn btn-sm btn-outline-secondary me-2" %>
                       <%= link_to "カート", public_cart_items_path, class:"btn btn-sm btn-outline-secondary me-2" %>
                       <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-sm btn-outline-secondary me-2" %>
