@@ -1,17 +1,31 @@
 Rails.application.routes.draw do
   
+  #ながのCAKEのトップページ
   root to:"public/homes#top"
+  
+  #Aboutページ画面
   get "public/homes/about" => "public/homes#about", as:"about"
   
-  namespace :public do
+  #会員のマイページ画面
+  get "customers/mypage" => "public/customers#show", as:"mypage"
+  
+  #退会確認画面
+  get "customers/unsubscribe" => "public/customers#unsubscribe", as:"unsubscribe"
+  
+  #退会処理（論理削除）のルーティング
+  patch "customers/:id/withdrawal" => "public/customers#withdrawal", as:"withdrawal"
+  
+  delete "/cart_items" => "public/cart_items#destroy_all"
+  
+  scope module: :public do
     resources :items, only:[:index, :show]
-    resources :customers, only:[:show, :edit, :update]
+    resources :customers, only:[:edit, :update]
     resources :cart_items, only:[:index, :create, :update, :destroy]
     resources :orders, only:[:new, :create, :index, :show]
-    resources :address, only:[:index, :create, :edit, :update, :destroy]
+    resources :addresses, only:[:index, :create, :edit, :update, :destroy]
   end
   
-  
+  #管理者の注文一覧画面
   get "/admin" => "admin/homes#top", as:"admin"
   
   namespace :admin do

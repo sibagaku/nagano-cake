@@ -1,62 +1,24 @@
-<header>
-  <nav class="navbar　navbar-light　bg-white">
-    <div class="container-fluid border-bottom border-dark">
-      <div class="row">
-        <div class="col-4 my-4">
-          <a class="navbar-brand" href="/">
-            <span><%= image_tag "logo.png" %></span>
-          </a>
-        </div>
-        <div class="col-4 ml-auto my-2 ">
-          <div class="row">
-             <% if customer_signed_in? %>
-                  <div class="col-12 d-flex justify-content-between">
-                      <%= link_to "マイページ", public_customer_path(current_customer), class:"btn btn-sm btn-outline-secondary me-2" %>
-                      <%= link_to "商品一覧", public_items_path, class:"btn btn-sm btn-outline-secondary me-2" %>
-                      <%= link_to "カート", public_cart_items_path, class:"btn btn-sm btn-outline-secondary me-2" %>
-                      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-sm btn-outline-secondary me-2" %>
-                  </div>
-             <% else %>
-                  <div class="col-12 d-flex justify-content-between">
-                      <%= link_to "About", about_path, class:"btn btn-sm btn-outline-secondary me-2 "  %>
-                      <%= link_to "商品一覧", public_items_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
-                      <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
-                      <%= link_to "ログイン", new_customer_session_path, class:"btn btn-sm  btn-outline-secondary me-2 "  %>
-                  </div>
-             <% end %>
-          </div>
-          <div class="row">
-            <div class="col-6 input-group ml-auto my-2">
-              <input type="text" class="form-control" placeholder="search">
-	             <span class="input-group-btn">
-		            <button type="button" class="btn btn-default">🔎</button>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
+<%= render "list", homes:@homes %>
 
 <main>
 <div class="container">
   <div class="row mt-5">
     <div class="col-2 border border-dark px-0 mr-5">
-      <table>
-        <thead class="border-bottom border-dark">
-          <tr>
-            <th class="ml-5">ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @genres.each do |genre| %>
-          <tr>
-            <td class="pl-3 py-1"><%= genre.name %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+        <div class="col-12 text-center border-bottom border-dark">
+          <strong>ジャンル検索</strong>
+        </div>
+        
+        <div class="col-12 px-0", style="height:270px;">
+          <table>
+            <tbody>
+            <% @genres.each do |genre| %>
+              <tr>
+                <td class="pl-3 py-1"><%= genre.name %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
     </div>
     
     
@@ -83,13 +45,13 @@
     <% @items.each do |item| %>
     <div class="col-2 px-0 mr-3">
       <div>
-        <%= link_to public_item_path(item.id) do %>
+        <%= link_to item_path(item.id) do %>
           <%= image_tag item.image, class:"top-item-image" %>
         <% end %>
       </div>
       <div class="top-item-text">
         <%= item.name %><br>
-        <%= item.price %>円
+        <%= ((item.price)*1.1).floor %>円
       </div>
     </div>
     <% end %>
@@ -97,7 +59,7 @@
   
   <div class="row">
     <div class="col-12 d-flex justify-content-end">
-      <%= link_to "全ての商品を見る＞", public_items_path %>
+      <%= link_to "全ての商品を見る＞", items_path %>
     </div>
   </div>
 </div>

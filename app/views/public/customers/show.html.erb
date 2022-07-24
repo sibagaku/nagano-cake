@@ -9,9 +9,67 @@
     </div>
   </div>
   
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 px-0">
+      <h5 class="mb-0"><strong>登録情報</strong></h5>
+    </div>
+    <div class="col-10 px-0 d-flex align-items-center">
+      <%= link_to "編集する", edit_customer_path(current_customer), class:"btn btn-success btn-sm", style:"width:100px;" %>
+    </div>
+  </div>
   
+  <div class="row mb-5">
+    <table border="1" width="70%">
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">氏名</th>
+        <td class="pl-1"><%= @customer.last_name %>　<%= @customer.first_name %></td>
+      </tr>
+      
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">カナ</th>
+        <td class="pl-1"><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+      </tr>
+      
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">郵便番号</th>
+        <td class="pl-1"><%= @customer.postal_code %></td>
+      </tr>
+      
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">住所</th>
+        <td class="pl-1"><%= @customer.address %></td>
+      </tr>
+      
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">電話番号</th>
+        <td class="pl-1"><%= @customer.telephone_number %></td>
+      </tr>
+      
+      <tr>
+        <th width="30%" class="py-3 pl-1 th-bg-color">メールアドレス</th>
+        <td class="pl-1"><%= @customer.email %></td>
+      </tr>
+    
+    </table>
+  </div>
   
+    <div class="row d-flex align-items-center mb-3">
+      <div class="col-2 px-0">
+        <h5 class="mb-0"><strong>配送先</strong></h5>
+      </div>
+      <div class="col-10 px-0 d-flex align-items-center">
+        <%= link_to "一覧を見る", addresses_path, class:"btn btn-primary btn-sm", style:"width:120px;" %>
+      </div>
+    </div>
   
+    <div class="row d-flex align-items-center mb-3">
+      <div class="col-2 px-0">
+        <h5 class="mb-0"><strong>注文履歴</strong></h5>
+      </div>
+      <div class="col-10 px-0 d-flex align-items-center">
+        <%= link_to "一覧を見る", orders_path, class:"btn btn-primary btn-sm", style:"width:120px;" %>
+      </div>
+    </div>
   
   
   
