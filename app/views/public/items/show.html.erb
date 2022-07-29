@@ -27,7 +27,7 @@
     <div class="col-6 ml-4">
         <h4><strong><%= @item.name %></strong></h4>
         <p><%= @item.introduction %></p>
-        <p><strong class="item-price">￥<%= ((@item.price)*1.1).floor %></strong>（税込）</p>
+        <p><strong class="item-price">￥<%= (((@item.price)*1.1).floor).to_s(:delimited) %></strong>（税込）</p>
         
         <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
             <% if customer_signed_in? %>

@@ -34,7 +34,7 @@
                     </div>
                     <div class="item-list-text">
                         <%= item.name %><br>
-                        <%= ((item.price)*1.1).floor %>
+                        ￥<%= (((item.price)*1.1).floor).to_s(:delimited) %>
                     </div>
                 </div>
                 <% end %>

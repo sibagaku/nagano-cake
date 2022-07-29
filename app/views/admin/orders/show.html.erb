@@ -1,1 +1,115 @@
-<% render "admin/genres/list", genres:@genres %>
+<%= render "admin/genres/list", genres:@genres %>
+
+<% if @order.errors.any? %>
+  <% @order.errors.full_messages.each do |message| %>
+  <%= message %>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="title col-8 mt-5 mb-2">
+      <h5><span class="title-bg-color px-3">注文履歴詳細</span></h5>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-12">
+          <table width="100%">
+              <tr>
+                  <th class="py-2", width="15%">購入者</th>
+                  <td colspan="2">
+                      <%= link_to admin_customer_path(@order.customer.id), class:"text-dark" do %>
+                          <%= @order.customer.full_name %>
+                      <% end %>
+                  </td>
+              </tr>
+              <tr>
+                  <th class="py-2", width="15%">注文日</th>
+                  <td colspan="2"><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+              </tr>
+              <tr>
+                  <th class="py-2", width="15%">配送先</th>
+                  <td colspan="2">
+                      〒<%= @order.delivery_postal_code %> <%= @order.delivery_address %><br>
+                      <%= @order.delivery_name %>
+                  </td>
+              </tr>
+              <tr>
+                  <th class="py-2", width="15%">支払方法</th>
+                  <td colspan="2">
+                      <% if @order.payment_method == "credit_card" %>
+                          <%= Order.payment_methods_i18n[:credit_card] %>
+                      <% else %>
+                          <%= Order.payment_methods_i18n[:transfer] %>
+                      <% end %>
+                  </td>
+              </tr>
+              <tr>
+                  <th class="py-2", width="15%">注文ステータス</th>
+                  <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f| %>
+                      <td width="15%">
+                          <%= f.select :status, [["入金待ち",0], ["入金確認",1], ["制作中",2], ["発送準備中",3], ["発送済み",4]],{}, class:"form-control text-center", style:"width:100%" %>
+                      </td>
+                      <td>
+                          <%= f.submit"更新", class:"btn btn-success ml-4" %>
+                      </td>
+                  <% end %>
+              </tr>
+          </table>
+      </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-8">
+      <table  class="table">
+        <thead class="bg-light">
+          <tr>
+            <th class="pl-2" width="35%">商品名</th>
+            <th class="text-center" width="20%">単価（税込）</th>
+            <th class="pl-3" width="10%">数量</th>
+            <th class="pl-3" width="10%">小計</th>
+            <th class="pl-2" width="25%">制作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |order_item| %>
+            <tr>
+              <td class="pl-2 py-2"><%= order_item.item.name %></td>
+              <td class="text-center py-2"><%= (order_item.item.with_tax_price).to_s(:delimited) %></td>
+              <td class="text-center py-2"><%= order_item.amount %></td>
+              <td class="text-center py-2"><%= (order_item.item.with_tax_price * order_item.amount).to_s(:delimited) %></td>
+              <%= form_with model: order_item, url: admin_order_item_path(order_item.id), method: :patch do |f| %>
+              <td class="text-center py-2">
+                  <%= f.select :making_status, [["着手不可",0], ["制作待ち",1], ["制作中",2], ["制作完了",3]],{}, class:"form-control text-center", style:"width:90%;" %>
+              </td>
+              <td class="py-2">
+                  <%= f.submit"更新", class:"btn btn-success" %>
+              </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="col-3 ml-5">
+      <table border="0" width="80%">
+        <tr>
+          <th>商品合計</th>
+          <td align="right"><%= (@order.payment).to_s(:delimited) %>円</td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td align="right"><%= (@order.postage).to_s(:delimited) %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td align="right" vertical-align:"bottom"><strong><%= (@order.payment + @order.postage).to_s(:delimited) %>円</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+</div>

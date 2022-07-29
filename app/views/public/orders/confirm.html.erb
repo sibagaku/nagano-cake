@@ -1,0 +1,96 @@
+<%= render "public/homes/list", homes:@homes %>
+
+<div class="container">
+  <div class="row">
+    <div class="title col-8 mt-5 mb-2">
+      <h5><span class="title-bg-color px-3">注文情報確認</span></h5>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-8">
+          <table border="1" width="100%">
+              <thead class="bg-light">
+                  <tr>
+                      <th class="py-3", style="width:50%;">商品名</th>
+                      <th class="py-3", style="width:15%;">単価(税込)</th>
+                      <th class="py-3", style="width:15%;">数量</th>
+                      <th class="py-3", style="width:15%;">小計</th>
+                  </tr>
+              </thead>
+              
+              <% @cart_items.each do |cart_item| %>
+              <% @total += cart_item.subtotal %>
+              <tbody>
+                  <tr>
+                      <td class="py-2 pl-1"><%= image_tag cart_item.item.image, size: "40x40" %>　<%= cart_item.item.name %></td>
+                      <td class="py-2 pl-1"><%= (cart_item.item.with_tax_price).to_s(:delimited) %></td>
+                      <td class="py-2 pl-1"><%= cart_item.amount %></td>
+                      <td class="py-2 pl-1"><%= (cart_item.item.with_tax_price * cart_item.amount).to_s(:delimited) %></td>
+                  </tr>
+              </tbody>
+              <% end %>
+          </table>
+      </div>
+      <div class="col-3 ml-3">
+          <table border="1" width="100%">
+              <tr>
+                  <th class="py-3 bg-light", style="width:50%;">送料</th>
+                  <td><%= @postage %></td>
+              </tr>
+              <tr>
+                  <th class="py-3 bg-light", style="width:50%;">商品合計</th>
+                  <td><%= (@total).to_s(:delimited) %></td>
+              </tr>
+              <tr>
+                  <th class="py-3 bg-light", style="width:50%;">請求金額</th>
+                  <td><%= (@postage+@total).to_s(:delimited) %></td>
+              </tr>
+          </table>
+      </div>
+  </div>
+  
+  <div class="row mt-4 mb-4">
+    <div class="col-2">
+      <h5><strong>支払方法</strong></h5>
+    </div>
+    
+    <div class="col-2 px-0">
+      <% if @order.payment_method == "credit_card" %>
+        <%= Order.payment_methods_i18n[:credit_card] %>
+      <% else %>
+        <%= Order.payment_methods_i18n[:transfer] %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-2">
+      <h5><strong>お届け先</strong></h5>
+    </div>
+    <div class="col-10 px-0">
+      〒<%= @order.delivery_postal_code %> <%= @order.delivery_address %><br>
+      <%= @order.delivery_name %>
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col-12 text-center">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+        <% if customer_signed_in? %>
+          <%= f.hidden_field :delivery_address, :value =>  @order.delivery_address %>
+          <%= f.hidden_field :delivery_postal_code, :value => @order.delivery_postal_code %>
+          <%= f.hidden_field :delivery_name, :value => @order.delivery_name %>
+          <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+          <%= f.hidden_field :payment, :value => @total %>
+          <%= f.hidden_field :postage, :value => @postage %>
+          <%= f.submit"注文を確定する", class:"btn btn-success", style:"width:170px;" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
+  
+  
+  
+</div>

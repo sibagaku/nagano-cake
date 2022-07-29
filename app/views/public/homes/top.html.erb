@@ -51,7 +51,7 @@
       </div>
       <div class="top-item-text">
         <%= item.name %><br>
-        <%= ((item.price)*1.1).floor %>円
+        ￥<%= (((item.price)*1.1).floor).to_s(:delimited) %>円
       </div>
     </div>
     <% end %>

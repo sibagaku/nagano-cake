@@ -15,7 +15,13 @@ Rails.application.routes.draw do
   #退会処理（論理削除）のルーティング
   patch "customers/:id/withdrawal" => "public/customers#withdrawal", as:"withdrawal"
   
+  #カート内商品全削除のルーティング
   delete "/cart_items" => "public/cart_items#destroy_all"
+  
+  #注文確認画面
+  post "orders/confirm" => "public/orders#confirm", as:"confirm"
+  #注文完了画面
+  get "orders/complete" => "public/orders#complete", as:"complete"
   
   scope module: :public do
     resources :items, only:[:index, :show]
@@ -33,7 +39,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :create, :edit, :update]
     resources :customers, only:[:index, :show, :edit, :update]
     resources :orders, only:[:show, :update]
-     resource :order_items, only:[:update]
+    resources :order_items, only:[:update]
   end
  
   
